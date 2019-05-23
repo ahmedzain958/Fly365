@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Fly365</string>
+    <string name="flight_search">Flight Search</string>
+    <string name="one_way">One Way</string>
+    <string name="round_trip">Round Trip</string>
+    <string name="multi_city">Multi City</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

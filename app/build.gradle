@@ -67,6 +67,7 @@ dependencies {
     implementation appDependencies.navigationFragment
     implementation appDependencies.cardView
 
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     kapt appDependencies.archCompiler
 
     testImplementation appTestDependencies.junit

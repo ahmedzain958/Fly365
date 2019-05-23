@@ -6,7 +6,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.animation.BounceInterpolator
-import com.zain.fly365.FlightSearchActivity
+import com.zain.fly365.flightsearch.presentation.ui.activity.FlightSearchActivity
 import com.zain.fly365.R
 import kotlinx.android.synthetic.main.activity_splash.*
 
