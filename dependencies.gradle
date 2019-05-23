@@ -41,17 +41,17 @@ ext {
     testingSupportLibVersion = '0.1'
     mockitoKotlinVersion = '1.5.0'
     mockitoAndroidVersion = '2.8.47'
+
     androidSupportRunnerVersion = '1.0.0'
     androidSupportRulesVersion = '1.0.0'
     dexmakerMockitoversion = '2.2.0'
     runnerVersion = '0.5'
     crashlytics = '2.9.5@aar'
-
-    //Chuck logging interceptor
     testRulesVersion = '1.0.2'
     navigation = '1.0.0-rc02'
     rxjavaMath = '1.0.0'
     roundedImage = '1.0.1'
+    materialSearchview = '1.4.0'
 
     appDependencies = [
             supportLibrary13   : "androidx.legacy:legacy-support-v13:${androidx}",
@@ -88,7 +88,8 @@ ext {
             navigationUi       : "android.arch.navigation:navigation-ui-ktx:${navigation}",
             rxBinding          : "com.jakewharton.rxbinding2:rxbinding-kotlin:${rxAndroidVersion}",
             cardView           : "androidx.cardview:cardview:${androidx}",
-            roundedImage       : "com.joooonho:selectableroundedimageview:${roundedImage}"
+            roundedImage       : "com.joooonho:selectableroundedimageview:${roundedImage}",
+            materialSearchview : "com.miguelcatalan:materialsearchview:${materialSearchview}"
     ]
 
     appTestDependencies = [

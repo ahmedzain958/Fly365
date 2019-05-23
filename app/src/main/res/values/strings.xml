@@ -4,7 +4,6 @@
     <string name="one_way">One Way</string>
     <string name="round_trip">Round Trip</string>
     <string name="multi_city">Multi City</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="from_where">From where?</string>
 </resources>
