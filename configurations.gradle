@@ -1,0 +1,12 @@
+ext {
+    endpoints = [
+            BASE_URL = "\"https://api.fly365stage.com/\"",
+    ]
+
+    accessTokens = [
+            API_KEY = "guMRjevTJNNgv49LRTNCTzfp9cWnW6Sj"
+    ]
+
+    constants = [
+    ]
+}
