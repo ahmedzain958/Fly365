@@ -45,7 +45,6 @@
                     android:layout_height="wrap_content"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
-
     <androidx.cardview.widget.CardView
             android:id="@+id/cityDestinationCard"
             android:layout_width="@dimen/width_160dp"
@@ -84,7 +83,82 @@
                     android:layout_height="wrap_content"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+            android:id="@+id/dateCard"
+            android:elevation="@dimen/elevation_4dp"
+            android:layout_width="@dimen/width_160dp"
+            android:layout_marginTop="@dimen/margin_8dp"
+            app:layout_constraintTop_toBottomOf="@id/cityOriginCard"
+            app:layout_constraintEnd_toEndOf="@id/cityOriginCard"
+            android:layout_height="@dimen/height_100dp"
+            app:layout_constraintStart_toStartOf="@id/cityOriginCard">
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <TextView
+                    android:id="@+id/textViewDate"
+                    android:textColor="@android:color/black"
+                    tools:text="May 28"
+                    style="@style/Title3Style"
+                    app:layout_constraintVertical_chainStyle="packed"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/textViewDay"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            <TextView
+                    android:id="@+id/textViewDay"
+                    android:textColor="@color/colorMidGrey"
+                    tools:text="Tuesday"
+                    app:layout_constraintTop_toBottomOf="@id/textViewDate"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:textSize="@dimen/size_10sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+            android:id="@+id/searchOptionsCard"
+            android:elevation="@dimen/elevation_4dp"
+            android:layout_width="@dimen/width_160dp"
+            app:layout_constraintTop_toTopOf="@id/dateCard"
+            app:layout_constraintBottom_toBottomOf="@id/dateCard"
+            app:layout_constraintEnd_toEndOf="@id/cityDestinationCard"
+            android:layout_height="@dimen/height_100dp"
+            app:layout_constraintStart_toStartOf="@id/cityDestinationCard">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <TextView
+                    android:id="@+id/textViewTravellers"
+                    android:textColor="@android:color/black"
+                    tools:text="1 Traveller"
+                    style="@style/Title3Style"
+                    app:layout_constraintVertical_chainStyle="packed"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/textViewType"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            <TextView
+                    android:id="@+id/textViewType"
+                    android:textColor="@color/colorMidGrey"
+                    tools:text="Tuesday"
+                    app:layout_constraintTop_toBottomOf="@id/textViewTravellers"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:textSize="@dimen/size_10sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
     <ImageView
             android:src="@drawable/ic_repeat"
             android:layout_width="@dimen/width_44dp"
