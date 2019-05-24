@@ -6,7 +6,7 @@
         android:background="@color/colorLightGrey"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".flightsearch.presentation.ui.activity.FlightSearchActivity">
+        tools:context=".flightsearch.presentation.ui.FlightSearchActivity">
 
     <include
             layout="@layout/fly365_toolbar"

@@ -1,4 +1,4 @@
-package com.zain.fly365.flightsearch.presentation.ui.activity
+package com.zain.fly365.flightsearch.presentation.ui
 
 import android.os.Bundle
 import com.google.android.material.tabs.TabLayout

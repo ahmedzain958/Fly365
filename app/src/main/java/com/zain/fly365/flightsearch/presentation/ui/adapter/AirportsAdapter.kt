@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.zain.fly365.R
-import com.zain.fly365.flightsearch.data.Airport
+import com.zain.fly365.oneway.entities.Airport
 import kotlinx.android.synthetic.main.item_airport.view.*
 
 internal class AirportsAdapter(val airportsList: List<Airport>, val airportClickedListener: OnAirportClickedListener) :

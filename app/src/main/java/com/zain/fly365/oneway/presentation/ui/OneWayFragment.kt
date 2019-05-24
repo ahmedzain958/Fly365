@@ -1,4 +1,4 @@
-package com.zain.fly365.flightsearch.presentation.ui.fragment
+package com.zain.fly365.oneway.presentation.ui
 
 
 import android.app.Activity.RESULT_OK
@@ -14,12 +14,16 @@ import android.widget.Toast
 import androidx.cardview.widget.CardView
 
 import com.zain.fly365.R
-import com.zain.fly365.flightsearch.data.Airport
-import com.zain.fly365.flightsearch.data.airportsList
-import com.zain.fly365.flightsearch.presentation.ui.activity.AirportsActivity
+import com.zain.fly365.oneway.entities.Airport
+import com.zain.fly365.flightsearch.presentation.ui.AirportsActivity
+import com.zain.fly365.base.presenter.AirportsListPresenter
+import com.zain.fly365.oneway.presentation.presenter.OneWayView
+import org.koin.android.ext.android.inject
+import org.koin.core.parameter.parametersOf
 
 
-class OneWayFragment : Fragment() {
+class OneWayFragment : Fragment(), OneWayView {
+
     companion object {
         private const val AIRPORTS_ORIGIN_CITY_REQUEST_CODE = 600
         private const val AIRPORTS_DESTINATION_CITY_REQUEST_CODE = 601
@@ -31,15 +35,17 @@ class OneWayFragment : Fragment() {
     private lateinit var textViewOriginAirport: TextView
     private lateinit var textViewDestinationCity: TextView
     private lateinit var textViewDestinationAirport: TextView
-    private lateinit var imageViewSwap: ImageView
     private lateinit var selectedOriginAirport: Airport
     private lateinit var selectedDestinationAirport: Airport
+    private lateinit var airportsList: List<Airport>
+    private val airportsListPresenter: AirportsListPresenter by inject { parametersOf(this) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_one_way, container, false)
+        airportsList = airportsListPresenter.getAirportsList()
         view?.let {
             initUI(view)
         }
@@ -62,7 +68,6 @@ class OneWayFragment : Fragment() {
             val temp = selectedOriginAirport
             selectedOriginAirport = selectedDestinationAirport
             selectedDestinationAirport = temp
-
             //swap origin to destination textviews
             textViewOriginCity.setText(selectedOriginAirport.city)
             textViewOriginAirport.setText(selectedOriginAirport.name)
@@ -76,13 +81,19 @@ class OneWayFragment : Fragment() {
         val cityDestinationCard = view.findViewById<CardView>(R.id.cityDestinationCard)
         cityOriginCard.setOnClickListener {
             Intent(context, AirportsActivity::class.java).also { intent ->
-                startActivityForResult(intent, AIRPORTS_ORIGIN_CITY_REQUEST_CODE)
+                startActivityForResult(
+                    intent,
+                    AIRPORTS_ORIGIN_CITY_REQUEST_CODE
+                )
             }
         }
         cityDestinationCard.setOnClickListener {
             Intent(context, AirportsActivity::class.java)
                 .also { intent ->
-                    startActivityForResult(intent, AIRPORTS_DESTINATION_CITY_REQUEST_CODE)
+                    startActivityForResult(
+                        intent,
+                        AIRPORTS_DESTINATION_CITY_REQUEST_CODE
+                    )
                 }
         }
     }
@@ -150,5 +161,22 @@ class OneWayFragment : Fragment() {
                 Toast.LENGTH_SHORT
             ).show()
         }
+    }
+
+
+    override fun showLoading() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun hideLoading() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun showError(error: Throwable) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun showMessage(msg: String) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

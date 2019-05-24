@@ -1,4 +1,4 @@
-package com.zain.fly365.flightsearch.presentation.ui.fragment
+package com.zain.fly365.multicity.presentation.ui
 
 
 import android.os.Bundle
@@ -18,14 +18,14 @@ private const val ARG_PARAM2 = "param2"
  * A simple [Fragment] subclass.
  *
  */
-class RoundTripFragment : Fragment() {
+class MultiCityFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_round_trip, container, false)
+        return inflater.inflate(R.layout.fragment_multi_city, container, false)
     }
 
 

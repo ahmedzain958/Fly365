@@ -3,9 +3,9 @@ package com.zain.fly365.flightsearch.presentation.ui.adapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.zain.fly365.flightsearch.presentation.ui.fragment.MultiCityFragment
-import com.zain.fly365.flightsearch.presentation.ui.fragment.OneWayFragment
-import com.zain.fly365.flightsearch.presentation.ui.fragment.RoundTripFragment
+import com.zain.fly365.multicity.presentation.ui.MultiCityFragment
+import com.zain.fly365.oneway.presentation.ui.OneWayFragment
+import com.zain.fly365.roundtrip.presentation.ui.RoundTripFragment
 
 class FlightSearchFragmentsAdapter(fragmentManager: FragmentManager, private val totalTabsCount: Int) :
     FragmentPagerAdapter(fragmentManager) {

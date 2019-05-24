@@ -1,4 +1,4 @@
-package com.zain.fly365.flightsearch.presentation.ui.activity
+package com.zain.fly365.flightsearch.presentation.ui
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,11 +9,12 @@ import com.zain.fly365.R
 import com.zain.fly365.base.ui.BaseActivity
 import kotlinx.android.synthetic.main.activity_airports.*
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.zain.fly365.flightsearch.data.Airport
-import com.zain.fly365.flightsearch.data.airportsList
+import com.zain.fly365.oneway.entities.Airport
 import com.zain.fly365.flightsearch.presentation.ui.adapter.AirportsAdapter
+import com.zain.fly365.base.presenter.AirportsListPresenter
 import io.reactivex.rxkotlin.toObservable
-
+import org.koin.android.ext.android.inject
+import org.koin.core.parameter.parametersOf
 
 class AirportsActivity : BaseActivity(), AirportsAdapter.OnAirportClickedListener {
 
@@ -22,6 +23,7 @@ class AirportsActivity : BaseActivity(), AirportsAdapter.OnAirportClickedListene
     }
 
     private lateinit var adapter: AirportsAdapter
+    private val airportsListPresenter: AirportsListPresenter by inject { parametersOf(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,16 +46,16 @@ class AirportsActivity : BaseActivity(), AirportsAdapter.OnAirportClickedListene
             override fun onQueryTextChange(newText: String?): Boolean {
                 //when traveller searches, the list will be filled be the airports that match the searched airport name
                 newText?.isEmpty().also {
-                    airportsList.toObservable().filter {
+                    airportsListPresenter.getAirportsList().toObservable().filter {
                         it.name.toLowerCase().contains(newText!!.toLowerCase())
                     }
                     val filteredAirportAdapter =
-                        AirportsAdapter(airportsList, this@AirportsActivity)
+                        AirportsAdapter(airportsListPresenter.getAirportsList(), this@AirportsActivity)
                     recyclerViewAirports.setAdapter(filteredAirportAdapter)
                 } ?: run {
                     //if search text is null or empty return default list of airports
                     val airportAdapter =
-                        AirportsAdapter(airportsList, this@AirportsActivity)
+                        AirportsAdapter(airportsListPresenter.getAirportsList(), this@AirportsActivity)
                     recyclerViewAirports.setAdapter(airportAdapter)
                 }
                 return true
@@ -62,7 +64,7 @@ class AirportsActivity : BaseActivity(), AirportsAdapter.OnAirportClickedListene
     }
 
     private fun initilizeRecyclerView() {
-        adapter = AirportsAdapter(airportsList, this)
+        adapter = AirportsAdapter(airportsListPresenter.getAirportsList(), this)
         recyclerViewAirports.layoutManager = LinearLayoutManager(this)
         recyclerViewAirports.setAdapter(adapter)
     }
