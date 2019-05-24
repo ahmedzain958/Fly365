@@ -1,8 +1,6 @@
 package com.zain.fly365.flightsearch.presentation.ui.activity
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import com.google.android.material.tabs.TabLayout
 import com.zain.fly365.R
 import com.zain.fly365.base.ui.BaseActivity
@@ -20,7 +18,7 @@ class FlightSearchActivity : BaseActivity() {
 
     //initialize user interface
     private fun initUI() {
-        initToolbar(flyToolbar, getString(R.string.flight_search), false)
+        initToolbar(flyToolbar, getString(R.string.flights), false)
         initTabLayout()
     }
 

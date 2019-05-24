@@ -25,7 +25,6 @@
             app:layout_constraintTop_toBottomOf="@id/fly365Toolbar"
             android:layout_height="wrap_content"
             app:tabIndicatorHeight="0dp"
-            android:background="@color/colorBorder"
             app:tabSelectedTextColor="@color/colorPrimary"
             app:tabTextColor="@color/colorDarkGrey"
             app:tabPaddingStart="@dimen/padding_16dp"
@@ -35,7 +34,7 @@
     <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewPager"
             android:layout_width="0dp"
-            android:layout_marginTop="@dimen/margin_16dp"
+            android:layout_marginTop="@dimen/margin_4dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"

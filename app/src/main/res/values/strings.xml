@@ -1,9 +1,10 @@
 <resources>
     <string name="app_name">Fly365</string>
-    <string name="flight_search">Flight Search</string>
+    <string name="flights">Flights</string>
     <string name="one_way">One Way</string>
     <string name="round_trip">Round Trip</string>
     <string name="multi_city">Multi City</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="from_where">From where?</string>
+    <string name="origin_and_destination_should_be_different">Origin and destination should be different</string>
 </resources>

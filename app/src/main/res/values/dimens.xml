@@ -102,6 +102,8 @@
     <dimen name="width_120dp">120dp</dimen>
     <dimen name="width_130dp">130dp</dimen>
     <dimen name="width_150dp">150dp</dimen>
+    <dimen name="width_160dp">160dp</dimen>
+    <dimen name="width_180dp">180dp</dimen>
     <dimen name="width_200dp">200dp</dimen>
 
     <dimen name="elevation_4dp">1dp</dimen>

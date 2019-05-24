@@ -10,6 +10,7 @@ import com.zain.fly365.base.ui.BaseActivity
 import kotlinx.android.synthetic.main.activity_airports.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.zain.fly365.flightsearch.data.Airport
+import com.zain.fly365.flightsearch.data.airportsList
 import com.zain.fly365.flightsearch.presentation.ui.adapter.AirportsAdapter
 import io.reactivex.rxkotlin.toObservable
 
@@ -20,17 +21,7 @@ class AirportsActivity : BaseActivity(), AirportsAdapter.OnAirportClickedListene
         const val SELECTED_AIRPORT_KEY = "selected_airport_key"
     }
 
-    // dummy list of airports instead of adding all world airports
-    private val airportsList = listOf(
-        Airport("CAI", "Cairo International Airport"),
-        Airport("SYD", "Sydney International Airport"),
-        Airport("ASW", "Aswan International Airport"),
-        Airport("JED", "Jeddah International Airport"),
-        Airport("RUH", "Riyadh International Airport"),
-        Airport("MED", "Madinah International Airport")
-    )
     private lateinit var adapter: AirportsAdapter
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
