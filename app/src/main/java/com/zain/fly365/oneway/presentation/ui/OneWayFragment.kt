@@ -1,6 +1,5 @@
 package com.zain.fly365.oneway.presentation.ui
 
-
 import android.annotation.SuppressLint
 import android.app.Activity.RESULT_OK
 import android.app.DatePickerDialog
@@ -15,6 +14,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
 import com.zain.fly365.R
+import com.zain.fly365.base.data.DateConstants
 import com.zain.fly365.oneway.entities.Airport
 import com.zain.fly365.flightsearch.presentation.ui.AirportsActivity
 import com.zain.fly365.base.presenter.AirportsListPresenter
@@ -24,7 +24,6 @@ import org.koin.core.parameter.parametersOf
 import java.text.SimpleDateFormat
 import java.util.*
 
-
 class OneWayFragment : Fragment(), OneWayView {
 
     companion object {
@@ -32,8 +31,6 @@ class OneWayFragment : Fragment(), OneWayView {
         private const val AIRPORTS_DESTINATION_CITY_REQUEST_CODE = 601
         private const val FIRST_AIRPORT_INDEX = 0
         private const val SECOND_AIRPORT_INDEX = 1
-        private const val MONTH_DAY_DATE_FORMAT = "MMM dd"
-        private const val DAY_DATE_FORMAT = "EEEE"
     }
 
     private lateinit var textViewOriginCity: TextView
@@ -45,6 +42,7 @@ class OneWayFragment : Fragment(), OneWayView {
     private lateinit var selectedOriginAirport: Airport
     private lateinit var selectedDestinationAirport: Airport
     private lateinit var airportsList: List<Airport>
+    private lateinit var departureDate: String
     private val airportsListPresenter: AirportsListPresenter by inject { parametersOf(this) }
 
     override fun onCreateView(
@@ -56,9 +54,16 @@ class OneWayFragment : Fragment(), OneWayView {
         view?.let {
             initUI(view)
         }
+        initDefaultValues()
+        return view
+    }
+
+    /*
+        init class variables values
+    */
+    private fun initDefaultValues() {
         selectedOriginAirport = airportsList.get(FIRST_AIRPORT_INDEX)
         selectedDestinationAirport = airportsList.get(SECOND_AIRPORT_INDEX)
-        return view
     }
 
     private fun initUI(view: View) {
@@ -70,12 +75,11 @@ class OneWayFragment : Fragment(), OneWayView {
     }
 
     private fun setDateCardViewsListener(view: View) {
-
         val dateCard = view.findViewById<CardView>(R.id.dateCard)
         val currentCalender = Calendar.getInstance()
         setDate(currentCalender)
 
-        val dateSetListener = DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+        val dateSetListener = DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
             val selectedCalender = Calendar.getInstance()
             selectedCalender.set(Calendar.YEAR, year)
             selectedCalender.set(Calendar.MONTH, monthOfYear)
@@ -83,7 +87,7 @@ class OneWayFragment : Fragment(), OneWayView {
             setDate(selectedCalender)
         }
         dateCard.setOnClickListener {
-            context?.let {
+            context?.let { context ->
                 val datePickerDialog =
                     DatePickerDialog(
                         context, dateSetListener,
@@ -100,8 +104,8 @@ class OneWayFragment : Fragment(), OneWayView {
 
     @SuppressLint("SimpleDateFormat")
     private fun setDate(calender: Calendar) {
-        val todaysDate = SimpleDateFormat(MONTH_DAY_DATE_FORMAT).format(calender.time)
-        val todaysDay = SimpleDateFormat(DAY_DATE_FORMAT).format(calender.time)
+        val todaysDate = SimpleDateFormat(DateConstants.MONTH_DAY_DATE_FORMAT).format(calender.time)
+        val todaysDay = SimpleDateFormat(DateConstants.DAY_DATE_FORMAT).format(calender.time)
         textViewDate.setText(todaysDate)
         textViewDay.setText(todaysDay)
     }
@@ -148,8 +152,8 @@ class OneWayFragment : Fragment(), OneWayView {
         textViewOriginAirport = view.findViewById(R.id.textViewOriginAirport)
         textViewDestinationCity = view.findViewById(R.id.textViewDestinationCity)
         textViewDestinationAirport = view.findViewById(R.id.textViewDestinationAirport)
-        textViewDate = view.findViewById<TextView>(R.id.textViewDate)
-        textViewDay = view.findViewById<TextView>(R.id.textViewDay)
+        textViewDate = view.findViewById(R.id.textViewDate)
+        textViewDay = view.findViewById(R.id.textViewDay)
     }
 
     /*
