@@ -26,11 +26,10 @@
             android:textColor="@android:color/white"
             android:textColorHint="@android:color/white"/>
 
-    <ListView
-            android:id="@+id/listViewAirports"
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewAirports"
             android:layout_height="match_parent"
             android:layout_width="match_parent"
             android:layout_below="@+id/toolbar"
-            android:divider="@color/colorSeparator"
-            android:dividerHeight="@dimen/line_height"/>
+            />
 </RelativeLayout>
