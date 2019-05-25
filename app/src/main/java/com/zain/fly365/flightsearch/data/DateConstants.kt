@@ -1,4 +1,4 @@
-package com.zain.fly365.base.data
+package com.zain.fly365.flightsearch.data
 
 
 object DateConstants {

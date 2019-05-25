@@ -1,4 +1,4 @@
-package com.hogroup.uctd.base.presenter
+package com.zain.fly365.base.presenter
 
 interface BasePresenter {
     fun onDestroy()

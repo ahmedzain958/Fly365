@@ -71,7 +71,6 @@ dependencies {
     implementation appDependencies.materialSearchview
 
     kapt appDependencies.archCompiler
-
     testImplementation appTestDependencies.junit
     testImplementation appTestDependencies.mockito
     testImplementation appTestDependencies.assertj

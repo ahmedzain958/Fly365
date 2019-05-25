@@ -7,4 +7,11 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="from_where">From where?</string>
     <string name="origin_and_destination_should_be_different">Origin and destination should be different</string>
+    <string name="traveller">traveller</string>
+    <string name="travellers">travellers</string>
+    <string name="cabin_type">Cabin type</string>
+    <string name="economy">Economy</string>
+    <string name="premium">Premium</string>
+    <string name="business">Business</string>
+    <string name="first">First</string>
 </resources>

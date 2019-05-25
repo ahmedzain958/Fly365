@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.activity_airports.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.zain.fly365.oneway.entities.Airport
 import com.zain.fly365.flightsearch.presentation.ui.adapter.AirportsAdapter
-import com.zain.fly365.base.presenter.AirportsListPresenter
+import com.zain.fly365.flightsearch.presentation.presenter.AirportsListPresenter
 import io.reactivex.rxkotlin.toObservable
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf

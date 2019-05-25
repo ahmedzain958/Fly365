@@ -14,10 +14,12 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
 import com.zain.fly365.R
-import com.zain.fly365.base.data.DateConstants
+import com.zain.fly365.flightsearch.data.DateConstants
 import com.zain.fly365.oneway.entities.Airport
 import com.zain.fly365.flightsearch.presentation.ui.AirportsActivity
-import com.zain.fly365.base.presenter.AirportsListPresenter
+import com.zain.fly365.flightsearch.presentation.presenter.AirportsListPresenter
+import com.zain.fly365.flightsearch.data.CabinClass
+import com.zain.fly365.flightsearch.presentation.ui.SearchOptionsActivity
 import com.zain.fly365.oneway.presentation.presenter.OneWayView
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
@@ -29,6 +31,7 @@ class OneWayFragment : Fragment(), OneWayView {
     companion object {
         private const val AIRPORTS_ORIGIN_CITY_REQUEST_CODE = 600
         private const val AIRPORTS_DESTINATION_CITY_REQUEST_CODE = 601
+        private const val SEARCH_OPTIONS_REQUEST_CODE = 602
         private const val FIRST_AIRPORT_INDEX = 0
         private const val SECOND_AIRPORT_INDEX = 1
     }
@@ -43,7 +46,9 @@ class OneWayFragment : Fragment(), OneWayView {
     private lateinit var selectedDestinationAirport: Airport
     private lateinit var airportsList: List<Airport>
     private lateinit var departureDate: String
+    private lateinit var cabinClass: CabinClass
     private val airportsListPresenter: AirportsListPresenter by inject { parametersOf(this) }
+    private var travellersNumber = 1
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -70,11 +75,12 @@ class OneWayFragment : Fragment(), OneWayView {
         initViews(view)
         initViewsDefaultValues()
         setOriginDestCardViewsListeners(view)
-        setDateCardViewsListener(view)
+        setDateCardViewListener(view)
+        setSearchOptionsCardViewListener(view)
         swapAirports(view)
     }
 
-    private fun setDateCardViewsListener(view: View) {
+    private fun setDateCardViewListener(view: View) {
         val dateCard = view.findViewById<CardView>(R.id.dateCard)
         val currentCalender = Calendar.getInstance()
         setDate(currentCalender)
@@ -102,12 +108,33 @@ class OneWayFragment : Fragment(), OneWayView {
         }
     }
 
+    private fun setSearchOptionsCardViewListener(view: View) {
+        val searchOptionsCard = view.findViewById<CardView>(R.id.searchOptionsCard)
+        val textViewTravellers = view.findViewById<TextView>(R.id.textViewTravellers)
+        val textViewCabinClass = view.findViewById<TextView>(R.id.textViewCabinClass)
+        textViewTravellers.text =
+            String.format(
+                "%s %s", travellersNumber, if (travellersNumber > 1) getString(R.string.travellers)
+                else getString(R.string.traveller)
+            )
+        textViewCabinClass.text = CabinClass.Economy.toString()
+        searchOptionsCard.setOnClickListener {
+            Intent(context, SearchOptionsActivity::class.java).also { intent ->
+                startActivityForResult(
+                    intent,
+                    SEARCH_OPTIONS_REQUEST_CODE
+                )
+            }
+        }
+    }
+
     @SuppressLint("SimpleDateFormat")
     private fun setDate(calender: Calendar) {
         val todaysDate = SimpleDateFormat(DateConstants.MONTH_DAY_DATE_FORMAT).format(calender.time)
         val todaysDay = SimpleDateFormat(DateConstants.DAY_DATE_FORMAT).format(calender.time)
         textViewDate.setText(todaysDate)
         textViewDay.setText(todaysDay)
+        departureDate = SimpleDateFormat(DateConstants.DEPARTURE_DATE_FORMAT).format(calender.time)
     }
 
     private fun swapAirports(view: View) {

@@ -1,6 +1,6 @@
-package com.zain.fly365.base.presenter
+package com.zain.fly365.flightsearch.presentation.presenter
 
-import com.hogroup.uctd.base.presenter.BasePresenter
+import com.zain.fly365.base.presenter.BasePresenter
 import com.zain.fly365.oneway.entities.Airport
 
 interface AirportsListPresenter: BasePresenter {

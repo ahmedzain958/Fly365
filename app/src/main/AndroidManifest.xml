@@ -9,15 +9,18 @@
     <dist:module dist:instant="true"/>
 
     <application
+            android:name=".Fly365Application"
             android:allowBackup="true"
             android:icon="@mipmap/fly365"
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
-            android:name=".Fly365Application"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".flightsearch.presentation.ui.AirportsActivity"
-                  android:screenOrientation="portrait">
+        <activity android:name=".flightsearch.presentation.ui.SearchOptionsActivity">
+        </activity>
+        <activity
+                android:name=".flightsearch.presentation.ui.AirportsActivity"
+                android:screenOrientation="portrait">
         </activity>
         <activity
                 android:name=".splash.SplashActivity"

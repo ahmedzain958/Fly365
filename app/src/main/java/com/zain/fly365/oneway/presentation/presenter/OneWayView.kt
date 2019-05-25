@@ -1,6 +1,6 @@
 package com.zain.fly365.oneway.presentation.presenter
 
-import com.hogroup.uctd.base.presenter.BaseView
+import com.zain.fly365.base.presenter.BaseView
 
 interface OneWayView : BaseView {
 

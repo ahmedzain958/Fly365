@@ -1,4 +1,4 @@
-package com.zain.fly365.base.presenter
+package com.zain.fly365.flightsearch.presentation.presenter
 
 import com.zain.fly365.oneway.domain.GetAirportsUseCase
 import com.zain.fly365.oneway.entities.Airport
