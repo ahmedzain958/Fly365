@@ -3,7 +3,7 @@ package com.zain.fly365.flightsearch.domain
 import com.zain.fly365.base.domain.usecases.UseCase
 import com.zain.fly365.flightsearch.entities.Airport
 
-class GetAirportsUseCase(private val flightsSearchRepository: FlightsSearchRepository) :
+class GetAirportsUseCase :
     UseCase<GetAirportsUseCase.Params, List<Airport>> {
     override fun execute(param: Params?): List<Airport> {
         return listOf(

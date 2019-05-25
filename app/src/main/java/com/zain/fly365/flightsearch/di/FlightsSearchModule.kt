@@ -14,12 +14,18 @@ import org.koin.dsl.module.module
 val flightsSearchModule = module {
     factory<FlightsSearchLocalDataSource> { FlightsSearchLocalDataSourceImpl(get()) }
     factory<FlightsSearchRepository> { FlightsSearchRepositoryImpl(get()) }
-    factory { GetAirportsUseCase(get()) }
+    factory { GetAirportsUseCase() }
     factory { GetTravellersNumberUseCase(get()) }
+    factory { GetAdultsNumberUseCase(get()) }
+    factory { GetChildrenNumberUseCase(get()) }
+    factory { GetInfantsNumberUseCase(get()) }
     factory { GetCabinClassUseCase(get()) }
     factory { InsertTravellerSearchOptionsUseCase(get()) }
     factory<SearchOptionsPresenter> {
         SearchOptionsPresenterImpl(
+            get(),
+            get(),
+            get(),
             get(),
             get(),
             get(),

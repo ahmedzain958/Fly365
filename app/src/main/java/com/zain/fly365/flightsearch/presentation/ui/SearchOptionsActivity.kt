@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.GridLayoutManager
 import com.zain.fly365.R
 import com.zain.fly365.flightsearch.data.CabinClass
@@ -16,12 +17,12 @@ import org.koin.core.parameter.parametersOf
 class SearchOptionsActivity : AppCompatActivity(), SearchOptionsAdapter.ItemClickListener {
 
     private lateinit var adapter: SearchOptionsAdapter
-    private var adultCount = 0
+    private var adultCount = 1
     private var childCount = 0
     private var infantCount = 0
     private var cabinClassSelectedValue: Int = 0
     private val searchOptionsPresenter: SearchOptionsPresenter by inject { parametersOf(this) }
-
+    val cabinClasses: Array<CabinClass> = CabinClass.values()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search_options)
@@ -29,18 +30,15 @@ class SearchOptionsActivity : AppCompatActivity(), SearchOptionsAdapter.ItemClic
     }
 
     private fun initUI() {
+        initilizeToolbar()
         val numberOfColumns = 2
         recyclerViewCabinTypes.layoutManager = GridLayoutManager(this, numberOfColumns)
-        adapter = SearchOptionsAdapter(CabinClass.values(), this)
+        //set cabin class by economy at the first time but by the previously selected value if changed before
+        setCabinClassSelectedValue()
+        adapter = SearchOptionsAdapter(cabinClasses, this)
         recyclerViewCabinTypes.adapter = adapter
         setIncrementAndDecrementClickListeners()
-        //set searchOptions default values cabinClassSelectedValue=0,adultCount=0,childCount=0,infantCount=0
-        searchOptionsPresenter.insertTravellerSearchOptions(
-            cabinClassSelectedValue,
-            adultCount,
-            childCount,
-            infantCount
-        )
+        setTravellersCount()
         buttonApply.setOnClickListener {
             searchOptionsPresenter.insertTravellerSearchOptions(
                 cabinClassSelectedValue,
@@ -55,6 +53,33 @@ class SearchOptionsActivity : AppCompatActivity(), SearchOptionsAdapter.ItemClic
         }
     }
 
+    private fun setTravellersCount() {
+        adultCount = searchOptionsPresenter.getAdultsNumber()
+        childCount = searchOptionsPresenter.getChildrenNumber()
+        infantCount = searchOptionsPresenter.getInfantsNumber()
+        editTextQuantityAdult.setText(adultCount.toString())
+        editTextQuantityChild.setText(childCount.toString())
+        editTextQuantityInfant.setText(infantCount.toString())
+    }
+
+    private fun setCabinClassSelectedValue() {
+        //clear all selected values from the list to avoid multi select
+        cabinClasses.map {
+            it.isSelected = false
+        }
+        cabinClassSelectedValue = searchOptionsPresenter.getSelectedCabinClass().value
+        cabinClasses.get(cabinClassSelectedValue).isSelected = true
+    }
+
+    private fun initilizeToolbar() {
+        val toolbar = findViewById(R.id.toolbar) as Toolbar
+        setSupportActionBar(toolbar)
+        supportActionBar?.run {
+            setDisplayHomeAsUpEnabled(true);
+            setDisplayShowHomeEnabled(true);
+        }
+    }
+
     private fun setIncrementAndDecrementClickListeners() {
         buttonIncrementAdult.setOnClickListener {
             val quantity = editTextQuantityAdult.text.toString().toInt()
@@ -63,7 +88,7 @@ class SearchOptionsActivity : AppCompatActivity(), SearchOptionsAdapter.ItemClic
         }
         buttonDecrementAdult.setOnClickListener {
             val quantity = editTextQuantityAdult.text.toString().toInt()
-            if (quantity != 0) {
+            if (quantity != 1) {
                 adultCount = quantity.dec()
                 editTextQuantityAdult.setText(adultCount.toString())
             }
@@ -95,7 +120,6 @@ class SearchOptionsActivity : AppCompatActivity(), SearchOptionsAdapter.ItemClic
     }
 
     override fun onItemClick(view: View, adapterPosition: Int) {
-        val cabinClasses: Array<CabinClass> = CabinClass.values()
         //clear all selected values from the list to avoid multi select
         cabinClasses.map {
             it.isSelected = false
@@ -107,4 +131,8 @@ class SearchOptionsActivity : AppCompatActivity(), SearchOptionsAdapter.ItemClic
         cabinClassSelectedValue = adapterPosition
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return super.onSupportNavigateUp()
+    }
 }

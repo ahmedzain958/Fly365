@@ -5,6 +5,8 @@ import io.reactivex.Completable
 
 class FlightsSearchRepositoryImpl(private val flightsSearchLocalDataSource: FlightsSearchLocalDataSource) :
     FlightsSearchRepository {
+
+
     override fun getCabinClass(): CabinClass {
         return flightsSearchLocalDataSource.getCabinClass()
     }
@@ -20,4 +22,15 @@ class FlightsSearchRepositoryImpl(private val flightsSearchLocalDataSource: Flig
         )
     }
 
+    override fun getAdultsNumber(): Int {
+        return flightsSearchLocalDataSource.getAdultsNumber()
+    }
+
+    override fun getChildrenNumber(): Int {
+        return flightsSearchLocalDataSource.getChildrenNumber()
+    }
+
+    override fun getInfantsNumber(): Int {
+        return flightsSearchLocalDataSource.getInfantsNumber()
+    }
 }

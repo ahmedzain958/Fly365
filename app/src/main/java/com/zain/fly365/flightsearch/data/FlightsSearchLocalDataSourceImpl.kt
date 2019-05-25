@@ -10,6 +10,7 @@ import io.reactivex.Completable
 class FlightsSearchLocalDataSourceImpl(val appPreference: AppPreference) :
     FlightsSearchLocalDataSource {
 
+
     override fun insertSearchOptions(
         cabinClass: Int, adults: Int,
         children: Int, infants: Int
@@ -24,7 +25,7 @@ class FlightsSearchLocalDataSourceImpl(val appPreference: AppPreference) :
     }
 
     override fun getTravellersNumber(): Int {
-        val adults = appPreference.getInt(KEY_PREFERENCE_ADULT_TRAVELLER, 0)
+        val adults = appPreference.getInt(KEY_PREFERENCE_ADULT_TRAVELLER, 1)
         val children = appPreference.getInt(KEY_PREFERENCE_CHILD_TRAVELLER, 0)
         val infants = appPreference.getInt(KEY_PREFERENCE_INFANT_TRAVELLER, 0)
         return adults + children + infants
@@ -32,5 +33,17 @@ class FlightsSearchLocalDataSourceImpl(val appPreference: AppPreference) :
 
     override fun getCabinClass(): CabinClass {
         return CabinClass.fromInt(appPreference.getInt(KEY_PREFERENCE_CABIN_TYPE, 0))!!
+    }
+
+    override fun getAdultsNumber(): Int {
+        return appPreference.getInt(KEY_PREFERENCE_ADULT_TRAVELLER, 1)
+    }
+
+    override fun getChildrenNumber(): Int {
+        return appPreference.getInt(KEY_PREFERENCE_CHILD_TRAVELLER, 1)
+    }
+
+    override fun getInfantsNumber(): Int {
+        return appPreference.getInt(KEY_PREFERENCE_INFANT_TRAVELLER, 1)
     }
 }

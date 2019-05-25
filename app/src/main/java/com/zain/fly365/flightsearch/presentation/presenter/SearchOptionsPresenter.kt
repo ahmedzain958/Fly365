@@ -6,6 +6,9 @@ import com.zain.fly365.flightsearch.entities.Airport
 
 interface SearchOptionsPresenter : BasePresenter {
     fun insertTravellerSearchOptions(cabinClassSelectedValue: Int, adultCount: Int, childCount: Int, infantCount: Int)
-    fun getTravellersNumberUseCase(): Int
+    fun getTravellersNumber(): Int
+    fun getAdultsNumber(): Int
+    fun getChildrenNumber(): Int
+    fun getInfantsNumber(): Int
     fun getSelectedCabinClass(): CabinClass
 }

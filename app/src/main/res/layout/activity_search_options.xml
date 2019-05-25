@@ -95,7 +95,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:id="@+id/editTextQuantityAdult"
-                android:text="@string/zero"
+                android:text="@string/one"
                 android:elevation="@dimen/elevation_4dp"
                 android:background="@null"
                 android:focusable="true"

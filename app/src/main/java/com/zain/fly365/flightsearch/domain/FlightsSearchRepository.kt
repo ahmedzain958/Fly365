@@ -10,7 +10,9 @@ interface FlightsSearchRepository{
         children: Int,
         infants: Int
     ):Completable
-
     fun getTravellersNumber(): Int
+    fun getAdultsNumber(): Int
+    fun getChildrenNumber(): Int
+    fun getInfantsNumber(): Int
     fun getCabinClass(): CabinClass
 }

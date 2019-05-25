@@ -116,12 +116,8 @@ class OneWayFragment : Fragment(), OneWayView {
         val searchOptionsCard = view.findViewById<CardView>(R.id.searchOptionsCard)
         textViewTravellers = view.findViewById(R.id.textViewTravellers)
         textViewCabinClass = view.findViewById(R.id.textViewCabinClass)
-        textViewTravellers.text =
-            String.format(
-                "%s %s", travellersNumber, if (travellersNumber > 1) getString(R.string.travellers)
-                else getString(R.string.traveller)
-            )
-        textViewCabinClass.text = CabinClass.Economy.toString()
+        setTravellersNumber()
+        textViewCabinClass.text = searchOptionsPresenter.getSelectedCabinClass().name
         searchOptionsCard.setOnClickListener {
             Intent(context, SearchOptionsActivity::class.java).also { intent ->
                 startActivityForResult(
@@ -136,8 +132,8 @@ class OneWayFragment : Fragment(), OneWayView {
     private fun setDate(calender: Calendar) {
         val todaysDate = SimpleDateFormat(DateConstants.MONTH_DAY_DATE_FORMAT).format(calender.time)
         val todaysDay = SimpleDateFormat(DateConstants.DAY_DATE_FORMAT).format(calender.time)
-        textViewDate.setText(todaysDate)
-        textViewDay.setText(todaysDay)
+        textViewDate.text = todaysDate
+        textViewDay.text = todaysDay
         departureDate = SimpleDateFormat(DateConstants.DEPARTURE_DATE_FORMAT).format(calender.time)
     }
 
@@ -208,17 +204,20 @@ class OneWayFragment : Fragment(), OneWayView {
                     val airport = data.getSerializableExtra(AirportsActivity.SELECTED_AIRPORT_KEY) as Airport
                     validateSelectedCityTo(airport)
                 } else if (requestCode == SEARCH_OPTIONS_REQUEST_CODE) {
-                    travellersNumber = searchOptionsPresenter.getTravellersNumberUseCase()
-                    textViewTravellers.text =
-                        String.format(
-                            "%s %s", travellersNumber, if (travellersNumber > 1) getString(R.string.travellers)
-                            else getString(R.string.traveller)
-                        )
+                    setTravellersNumber()
                     textViewCabinClass.text = searchOptionsPresenter.getSelectedCabinClass().name
-
                 }
             }
         }
+    }
+
+    private fun setTravellersNumber() {
+        travellersNumber = searchOptionsPresenter.getTravellersNumber()
+        textViewTravellers.text =
+            String.format(
+                "%s %s", travellersNumber, if (travellersNumber > 1) getString(R.string.travellers)
+                else getString(R.string.traveller)
+            )
     }
 
     /*
