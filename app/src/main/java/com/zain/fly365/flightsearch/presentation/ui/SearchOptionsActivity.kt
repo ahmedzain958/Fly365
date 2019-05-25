@@ -1,5 +1,6 @@
 package com.zain.fly365.flightsearch.presentation.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -33,6 +34,13 @@ class SearchOptionsActivity : AppCompatActivity(), SearchOptionsAdapter.ItemClic
         adapter = SearchOptionsAdapter(CabinClass.values(), this)
         recyclerViewCabinTypes.adapter = adapter
         setIncrementAndDecrementClickListeners()
+        //set searchOptions default values cabinClassSelectedValue=0,adultCount=0,childCount=0,infantCount=0
+        searchOptionsPresenter.insertTravellerSearchOptions(
+            cabinClassSelectedValue,
+            adultCount,
+            childCount,
+            infantCount
+        )
         buttonApply.setOnClickListener {
             searchOptionsPresenter.insertTravellerSearchOptions(
                 cabinClassSelectedValue,
@@ -40,6 +48,10 @@ class SearchOptionsActivity : AppCompatActivity(), SearchOptionsAdapter.ItemClic
                 childCount,
                 infantCount
             )
+            Intent().also {
+                setResult(RESULT_OK, it)
+                finish()
+            }
         }
     }
 
@@ -84,6 +96,7 @@ class SearchOptionsActivity : AppCompatActivity(), SearchOptionsAdapter.ItemClic
 
     override fun onItemClick(view: View, adapterPosition: Int) {
         val cabinClasses: Array<CabinClass> = CabinClass.values()
+        //clear all selected values from the list to avoid multi select
         cabinClasses.map {
             it.isSelected = false
         }

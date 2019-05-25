@@ -19,6 +19,7 @@ import com.zain.fly365.flightsearch.entities.Airport
 import com.zain.fly365.flightsearch.presentation.ui.AirportsActivity
 import com.zain.fly365.flightsearch.presentation.presenter.AirportsListPresenter
 import com.zain.fly365.flightsearch.data.CabinClass
+import com.zain.fly365.flightsearch.presentation.presenter.SearchOptionsPresenter
 import com.zain.fly365.flightsearch.presentation.ui.SearchOptionsActivity
 import com.zain.fly365.oneway.presentation.presenter.OneWayView
 import org.koin.android.ext.android.inject
@@ -42,12 +43,15 @@ class OneWayFragment : Fragment(), OneWayView {
     private lateinit var textViewDestinationAirport: TextView
     private lateinit var textViewDate: TextView
     private lateinit var textViewDay: TextView
+    private lateinit var textViewTravellers: TextView
+    private lateinit var textViewCabinClass: TextView
     private lateinit var selectedOriginAirport: Airport
     private lateinit var selectedDestinationAirport: Airport
     private lateinit var airportsList: List<Airport>
     private lateinit var departureDate: String
     private lateinit var cabinClass: CabinClass
     private val airportsListPresenter: AirportsListPresenter by inject { parametersOf(this) }
+    private val searchOptionsPresenter: SearchOptionsPresenter by inject { parametersOf(this) }
     private var travellersNumber = 1
 
     override fun onCreateView(
@@ -110,8 +114,8 @@ class OneWayFragment : Fragment(), OneWayView {
 
     private fun setSearchOptionsCardViewListener(view: View) {
         val searchOptionsCard = view.findViewById<CardView>(R.id.searchOptionsCard)
-        val textViewTravellers = view.findViewById<TextView>(R.id.textViewTravellers)
-        val textViewCabinClass = view.findViewById<TextView>(R.id.textViewCabinClass)
+        textViewTravellers = view.findViewById(R.id.textViewTravellers)
+        textViewCabinClass = view.findViewById(R.id.textViewCabinClass)
         textViewTravellers.text =
             String.format(
                 "%s %s", travellersNumber, if (travellersNumber > 1) getString(R.string.travellers)
@@ -196,12 +200,22 @@ class OneWayFragment : Fragment(), OneWayView {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         data?.let {
-            val airport = data.getSerializableExtra(AirportsActivity.SELECTED_AIRPORT_KEY) as Airport
             if (resultCode == RESULT_OK) {
                 if (requestCode == AIRPORTS_ORIGIN_CITY_REQUEST_CODE) {
+                    val airport = data.getSerializableExtra(AirportsActivity.SELECTED_AIRPORT_KEY) as Airport
                     validateSelectedCityFrom(airport)
                 } else if (requestCode == AIRPORTS_DESTINATION_CITY_REQUEST_CODE) {
+                    val airport = data.getSerializableExtra(AirportsActivity.SELECTED_AIRPORT_KEY) as Airport
                     validateSelectedCityTo(airport)
+                } else if (requestCode == SEARCH_OPTIONS_REQUEST_CODE) {
+                    travellersNumber = searchOptionsPresenter.getTravellersNumberUseCase()
+                    textViewTravellers.text =
+                        String.format(
+                            "%s %s", travellersNumber, if (travellersNumber > 1) getString(R.string.travellers)
+                            else getString(R.string.traveller)
+                        )
+                    textViewCabinClass.text = searchOptionsPresenter.getSelectedCabinClass().name
+
                 }
             }
         }

@@ -1,5 +1,6 @@
 package com.zain.fly365.flightsearch.domain
 
+import com.zain.fly365.flightsearch.data.CabinClass
 import io.reactivex.Completable
 
 interface FlightsSearchRepository{
@@ -9,4 +10,7 @@ interface FlightsSearchRepository{
         children: Int,
         infants: Int
     ):Completable
+
+    fun getTravellersNumber(): Int
+    fun getCabinClass(): CabinClass
 }

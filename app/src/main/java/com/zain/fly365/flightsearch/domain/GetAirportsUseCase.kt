@@ -17,11 +17,6 @@ class GetAirportsUseCase(private val flightsSearchRepository: FlightsSearchRepos
     }
 
     class Params private constructor() {
-        companion object {
-            @JvmStatic
-            fun create(): Params {
-                return Params()
-            }
-        }
+        companion object
     }
 }

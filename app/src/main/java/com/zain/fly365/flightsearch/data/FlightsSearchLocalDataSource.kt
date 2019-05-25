@@ -9,4 +9,7 @@ interface FlightsSearchLocalDataSource {
         children: Int,
         infants: Int
     ): Completable
+    fun getTravellersNumber(): Int
+    fun getCabinClass(): CabinClass
+
 }
