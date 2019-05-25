@@ -1,6 +1,7 @@
 package com.zain.fly365.flightsearch.domain
 
 import com.zain.fly365.base.domain.usecases.UseCase
+import com.zain.fly365.flightsearch.data.FlightsSearchRepository
 import io.reactivex.Completable
 
 class InsertTravellerSearchOptionsUseCase(private val flightsSearchRepository: FlightsSearchRepository) :

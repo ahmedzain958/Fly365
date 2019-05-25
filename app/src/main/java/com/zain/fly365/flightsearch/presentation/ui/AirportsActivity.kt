@@ -100,4 +100,8 @@ class AirportsActivity : BaseActivity(), AirportsAdapter.OnAirportClickedListene
         searchViewAirport.setMenuItem(item)
         return true
     }
+    override fun onDestroy() {
+        airportsListPresenter.onDestroy()
+        super.onDestroy()
+    }
 }

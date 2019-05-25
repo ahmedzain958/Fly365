@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -16,18 +17,18 @@ import androidx.cardview.widget.CardView
 import com.zain.fly365.R
 import com.zain.fly365.flightsearch.data.DateConstants
 import com.zain.fly365.flightsearch.entities.Airport
+import com.zain.fly365.flightsearch.entities.RequestLeg
 import com.zain.fly365.flightsearch.presentation.ui.AirportsActivity
 import com.zain.fly365.flightsearch.presentation.presenter.AirportsListPresenter
-import com.zain.fly365.flightsearch.data.CabinClass
 import com.zain.fly365.flightsearch.presentation.presenter.SearchOptionsPresenter
 import com.zain.fly365.flightsearch.presentation.ui.SearchOptionsActivity
-import com.zain.fly365.oneway.presentation.presenter.OneWayView
+import com.zain.fly365.oneway.presentation.ui.OneWayFlightsActivity.Companion.LEG_KEY
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 import java.text.SimpleDateFormat
 import java.util.*
 
-class OneWayFragment : Fragment(), OneWayView {
+class OneWayFragment : Fragment() {
 
     companion object {
         private const val AIRPORTS_ORIGIN_CITY_REQUEST_CODE = 600
@@ -45,11 +46,12 @@ class OneWayFragment : Fragment(), OneWayView {
     private lateinit var textViewDay: TextView
     private lateinit var textViewTravellers: TextView
     private lateinit var textViewCabinClass: TextView
+    private lateinit var buttonSearch: Button
     private lateinit var selectedOriginAirport: Airport
     private lateinit var selectedDestinationAirport: Airport
     private lateinit var airportsList: List<Airport>
     private lateinit var departureDate: String
-    private lateinit var cabinClass: CabinClass
+    private lateinit var leg: RequestLeg
     private val airportsListPresenter: AirportsListPresenter by inject { parametersOf(this) }
     private val searchOptionsPresenter: SearchOptionsPresenter by inject { parametersOf(this) }
     private var travellersNumber = 1
@@ -60,10 +62,10 @@ class OneWayFragment : Fragment(), OneWayView {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_one_way, container, false)
         airportsList = airportsListPresenter.getAirportsList()
+        initDefaultValues()
         view?.let {
             initUI(view)
         }
-        initDefaultValues()
         return view
     }
 
@@ -73,6 +75,20 @@ class OneWayFragment : Fragment(), OneWayView {
     private fun initDefaultValues() {
         selectedOriginAirport = airportsList.get(FIRST_AIRPORT_INDEX)
         selectedDestinationAirport = airportsList.get(SECOND_AIRPORT_INDEX)
+        departureDate = SimpleDateFormat(DateConstants.DEPARTURE_DATE_FORMAT).format(Calendar.getInstance().time)
+        setLeg(
+            selectedOriginAirport.city,
+            selectedDestinationAirport.city,
+            departureDate
+        )
+    }
+
+    private fun setLeg(
+        origin: String,
+        destination: String,
+        departureDate: String
+    ) {
+        leg = RequestLeg(searchOptionsPresenter.getSelectedCabinClass().name, departureDate, destination, origin)
     }
 
     private fun initUI(view: View) {
@@ -82,6 +98,14 @@ class OneWayFragment : Fragment(), OneWayView {
         setDateCardViewListener(view)
         setSearchOptionsCardViewListener(view)
         swapAirports(view)
+        buttonSearch.setOnClickListener {
+            Intent(context, OneWayFlightsActivity::class.java).apply {
+                putExtra(LEG_KEY, leg)
+                startActivity(
+                    this
+                )
+            }
+        }
     }
 
     private fun setDateCardViewListener(view: View) {
@@ -95,6 +119,11 @@ class OneWayFragment : Fragment(), OneWayView {
             selectedCalender.set(Calendar.MONTH, monthOfYear)
             selectedCalender.set(Calendar.DAY_OF_MONTH, dayOfMonth)
             setDate(selectedCalender)
+            setLeg(
+                selectedOriginAirport.city,
+                selectedDestinationAirport.city,
+                departureDate
+            )
         }
         dateCard.setOnClickListener {
             context?.let { context ->
@@ -110,6 +139,11 @@ class OneWayFragment : Fragment(), OneWayView {
             }
 
         }
+        setLeg(
+            selectedOriginAirport.city,
+            selectedDestinationAirport.city,
+            departureDate
+        )
     }
 
     private fun setSearchOptionsCardViewListener(view: View) {
@@ -181,6 +215,7 @@ class OneWayFragment : Fragment(), OneWayView {
         textViewDestinationAirport = view.findViewById(R.id.textViewDestinationAirport)
         textViewDate = view.findViewById(R.id.textViewDate)
         textViewDay = view.findViewById(R.id.textViewDay)
+        buttonSearch = view.findViewById(R.id.buttonSearch)
     }
 
     /*
@@ -252,22 +287,5 @@ class OneWayFragment : Fragment(), OneWayView {
                 Toast.LENGTH_SHORT
             ).show()
         }
-    }
-
-
-    override fun showLoading() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun hideLoading() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun showError(error: Throwable) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun showMessage(msg: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

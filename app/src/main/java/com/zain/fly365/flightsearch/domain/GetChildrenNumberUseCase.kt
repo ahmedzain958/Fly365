@@ -1,7 +1,7 @@
 package com.zain.fly365.flightsearch.domain
 
 import com.zain.fly365.base.domain.usecases.UseCase
-import com.zain.fly365.flightsearch.entities.Airport
+import com.zain.fly365.flightsearch.data.FlightsSearchRepository
 
 class GetChildrenNumberUseCase(private val flightsSearchRepository: FlightsSearchRepository) :
     UseCase<GetChildrenNumberUseCase.Params, Int> {

@@ -135,4 +135,9 @@ class SearchOptionsActivity : AppCompatActivity(), SearchOptionsAdapter.ItemClic
         onBackPressed()
         return super.onSupportNavigateUp()
     }
+
+    override fun onDestroy() {
+        searchOptionsPresenter.onDestroy()
+        super.onDestroy()
+    }
 }

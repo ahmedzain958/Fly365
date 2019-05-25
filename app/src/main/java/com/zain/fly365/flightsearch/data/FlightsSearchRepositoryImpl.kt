@@ -1,11 +1,16 @@
 package com.zain.fly365.flightsearch.data
 
-import com.zain.fly365.flightsearch.domain.FlightsSearchRepository
+import com.zain.fly365.flightsearch.entities.Leg
+import com.zain.fly365.flightsearch.entities.RequestLeg
+import com.zain.fly365.flightsearch.entities.SearchResponse
 import io.reactivex.Completable
+import io.reactivex.Single
 
-class FlightsSearchRepositoryImpl(private val flightsSearchLocalDataSource: FlightsSearchLocalDataSource) :
+class FlightsSearchRepositoryImpl(
+    private val flightsSearchLocalDataSource: FlightsSearchLocalDataSource,
+    private val flightsSearchRemoteDataSource: FlightsSearchRemoteDataSource
+) :
     FlightsSearchRepository {
-
 
     override fun getCabinClass(): CabinClass {
         return flightsSearchLocalDataSource.getCabinClass()
@@ -33,4 +38,13 @@ class FlightsSearchRepositoryImpl(private val flightsSearchLocalDataSource: Flig
     override fun getInfantsNumber(): Int {
         return flightsSearchLocalDataSource.getInfantsNumber()
     }
+
+    override fun searchOneWayFlights(
+        cabinClass: String, infant: Int, child: Int, adult: Int, legs: List<RequestLeg>
+    ): Single<SearchResponse> {
+        return flightsSearchRemoteDataSource.searchOneWayFlights(
+            cabinClass, infant, child, adult, legs
+        )
+    }
+
 }

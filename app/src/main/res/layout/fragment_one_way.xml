@@ -172,7 +172,10 @@
             tools:layout_editor_absoluteX="141dp"
             android:id="@+id/imageViewSwap"/>
 
-    <Button android:layout_width="0dp" android:layout_height="wrap_content"
+    <Button
+            android:id="@+id/buttonSearch"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             android:text="@string/search_hint"
             app:layout_constraintEnd_toEndOf="parent"

@@ -44,7 +44,7 @@ val remoteModule = module {
             .baseUrl(BuildConfig.BASE_URL)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create(get()))
-            .client(get(DEFAULT_OK_HTTP))
+            .client(get())
             .build()
     }
 }
