@@ -15,7 +15,7 @@ import android.widget.Toast
 import androidx.cardview.widget.CardView
 import com.zain.fly365.R
 import com.zain.fly365.flightsearch.data.DateConstants
-import com.zain.fly365.oneway.entities.Airport
+import com.zain.fly365.flightsearch.entities.Airport
 import com.zain.fly365.flightsearch.presentation.ui.AirportsActivity
 import com.zain.fly365.flightsearch.presentation.presenter.AirportsListPresenter
 import com.zain.fly365.flightsearch.data.CabinClass

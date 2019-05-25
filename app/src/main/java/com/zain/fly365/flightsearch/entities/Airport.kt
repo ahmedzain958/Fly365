@@ -1,4 +1,4 @@
-package com.zain.fly365.oneway.entities
+package com.zain.fly365.flightsearch.entities
 
 import java.io.Serializable
 

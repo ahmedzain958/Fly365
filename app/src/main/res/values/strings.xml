@@ -14,4 +14,10 @@
     <string name="premium">Premium</string>
     <string name="business">Business</string>
     <string name="first">First</string>
+    <string name="adult">Adult</string>
+    <string name="zero">0</string>
+    <string name="child">Child</string>
+    <string name="infant">Infant</string>
+    <string name="apply">Apply</string>
+    <string name="travellers_capital">Travellers</string>
 </resources>

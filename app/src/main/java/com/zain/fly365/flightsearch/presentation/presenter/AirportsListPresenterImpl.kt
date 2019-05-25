@@ -1,7 +1,7 @@
 package com.zain.fly365.flightsearch.presentation.presenter
 
-import com.zain.fly365.oneway.domain.GetAirportsUseCase
-import com.zain.fly365.oneway.entities.Airport
+import com.zain.fly365.flightsearch.domain.GetAirportsUseCase
+import com.zain.fly365.flightsearch.entities.Airport
 
 class AirportsListPresenterImpl constructor(
     private val getAirportsUseCase: GetAirportsUseCase

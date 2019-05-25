@@ -9,7 +9,7 @@ import com.zain.fly365.R
 import com.zain.fly365.base.ui.BaseActivity
 import kotlinx.android.synthetic.main.activity_airports.*
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.zain.fly365.oneway.entities.Airport
+import com.zain.fly365.flightsearch.entities.Airport
 import com.zain.fly365.flightsearch.presentation.ui.adapter.AirportsAdapter
 import com.zain.fly365.flightsearch.presentation.presenter.AirportsListPresenter
 import io.reactivex.rxkotlin.toObservable
@@ -46,11 +46,14 @@ class AirportsActivity : BaseActivity(), AirportsAdapter.OnAirportClickedListene
             override fun onQueryTextChange(newText: String?): Boolean {
                 //when traveller searches, the list will be filled be the airports that match the searched airport name
                 newText?.isEmpty().also {
+                    val airportsList = mutableListOf<Airport>()
                     airportsListPresenter.getAirportsList().toObservable().filter {
                         it.name.toLowerCase().contains(newText!!.toLowerCase())
+                    }.subscribe {
+                        airportsList.add(it)
                     }
                     val filteredAirportAdapter =
-                        AirportsAdapter(airportsListPresenter.getAirportsList(), this@AirportsActivity)
+                        AirportsAdapter(airportsList, this@AirportsActivity)
                     recyclerViewAirports.setAdapter(filteredAirportAdapter)
                 } ?: run {
                     //if search text is null or empty return default list of airports
