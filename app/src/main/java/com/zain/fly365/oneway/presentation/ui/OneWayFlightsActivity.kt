@@ -3,6 +3,7 @@ package com.zain.fly365.oneway.presentation.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import com.zain.fly365.R
 import com.zain.fly365.flightsearch.entities.RequestLeg
@@ -58,12 +59,20 @@ class OneWayFlightsActivity : AppCompatActivity(), OneWayFlightsView {
         recyclerViewFlights.visibility = View.VISIBLE
     }
 
-    override fun showError(error: Throwable) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun showError(error: String) {
+        Toast.makeText(
+            this,
+            error,
+            Toast.LENGTH_SHORT
+        ).show()
     }
 
     override fun showMessage(msg: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        Toast.makeText(
+            this,
+            msg,
+            Toast.LENGTH_SHORT
+        ).show()
     }
 
     override fun onDestroy() {

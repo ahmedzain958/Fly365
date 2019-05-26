@@ -3,6 +3,7 @@ package com.zain.fly365.base.javakoin
 import android.app.Application
 import com.zain.fly365.base.data.local.di.localModule
 import com.zain.fly365.base.data.remote.di.remoteModule
+import com.zain.fly365.base.data.resources.di.resourcesModule
 import com.zain.fly365.base.di.appModule
 import com.zain.fly365.base.threadsexecution.executionSchedulerModule
 import com.zain.fly365.flightsearch.di.flightsSearchModule
@@ -17,6 +18,8 @@ fun start(application: Application) {
             , remoteModule
             , localModule
             , flightsSearchModule
+            , resourcesModule
+
         )
     ) with application
 }

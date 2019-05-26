@@ -1,6 +1,6 @@
 package com.zain.fly365.oneway.presentation.presenter
 
-import android.util.Log
+import com.zain.fly365.base.data.exception.APIException
 import com.zain.fly365.base.threadsexecution.ExecutionThread
 import com.zain.fly365.flightsearch.data.CabinClass
 import com.zain.fly365.flightsearch.domain.*
@@ -47,7 +47,11 @@ class OneWayFlightPresenterImpl(
 
                     }
                 }, { throwable ->
-                    Log.e("tag_error", throwable.message)
+                    if (throwable is APIException) {
+                        view?.showError(throwable.message!!)
+                    } else {
+                        view?.showError(throwable.message!!)
+                    }
                 })
         )
     }
