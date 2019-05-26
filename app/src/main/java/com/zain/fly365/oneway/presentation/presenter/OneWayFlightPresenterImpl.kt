@@ -47,11 +47,7 @@ class OneWayFlightPresenterImpl(
 
                     }
                 }, { throwable ->
-                    if (throwable is APIException) {
                         view?.showError(throwable.message!!)
-                    } else {
-                        view?.showError(throwable.message!!)
-                    }
                 })
         )
     }

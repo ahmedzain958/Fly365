@@ -42,10 +42,9 @@ class ErrorMappingInterceptor(
             val charset = body.contentType()!!.charset(Charset.forName("UTF-8"))!!
             val responseBody = buffer.clone().readString(charset)
             try {
-
                 val apiException = gsonParser.fromJson(responseBody, APIException::class.java)
                 apiException.code = response.code()
-                if (apiException.errors != null) {
+                if (apiException.errors?.legsOrigin == null) {
                     apiException.message = resourcesRepository.getGenericUnknownErrorMessage()
                     throw apiException
 
