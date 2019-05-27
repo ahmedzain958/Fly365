@@ -22,7 +22,6 @@ Clean Architecture: app contains a domain, data and presentation layers to isola
 Retrofit and Okhttp: for calling network apis
 
 
-## Accomplished:
 
 ## Accomplished:
 - The application starts with displaying flight search form that matching the one on our website (https://nz.fly365.com/)
