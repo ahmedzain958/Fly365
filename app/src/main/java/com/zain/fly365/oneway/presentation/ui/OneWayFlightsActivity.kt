@@ -1,5 +1,7 @@
 package com.zain.fly365.oneway.presentation.ui
 
+import android.app.Activity
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -7,8 +9,14 @@ import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.zain.fly365.R
+import com.zain.fly365.flightsearch.entities.Airport
 import com.zain.fly365.flightsearch.entities.Flight
 import com.zain.fly365.flightsearch.entities.RequestLeg
+import com.zain.fly365.flightsearch.presentation.ui.AirportsActivity
+import com.zain.fly365.flightsearch.presentation.ui.FilterActivity
+import com.zain.fly365.flightsearch.presentation.ui.FilterActivity.Companion.SELECTED_AIRPORTS_KEY
+import com.zain.fly365.flightsearch.presentation.ui.FilterActivity.Companion.SELECTED_AIRWAYS_KEY
+import com.zain.fly365.flightsearch.presentation.ui.FilterActivity.Companion.SELECTED_STOPS_KEY
 import com.zain.fly365.flightsearch.presentation.ui.adapter.AirportsAdapter
 import com.zain.fly365.oneway.presentation.presenter.OneWayFlightPresenter
 import com.zain.fly365.oneway.presentation.presenter.OneWayFlightsView
@@ -21,6 +29,7 @@ class OneWayFlightsActivity : AppCompatActivity(), OneWayFlightsView {
 
     companion object {
         const val LEG_KEY = "leg_key"
+        const val FILTER_REQUEST_CODE = 700
     }
 
     private val oneWayFlightPresenter: OneWayFlightPresenter by inject { parametersOf(this) }
@@ -31,12 +40,15 @@ class OneWayFlightsActivity : AppCompatActivity(), OneWayFlightsView {
         initUI()
         val leg = intent.getSerializableExtra(LEG_KEY) as RequestLeg
         oneWayFlightPresenter.getFlights(leg)
+
     }
 
     private fun initUI() {
         initilizeToolbar()
         fabFilter.setOnClickListener {
-            //todo
+            startActivityForResult(
+                Intent(this, FilterActivity::class.java), FILTER_REQUEST_CODE
+            )
         }
     }
 
@@ -55,7 +67,7 @@ class OneWayFlightsActivity : AppCompatActivity(), OneWayFlightsView {
     }
 
     override fun fillFlightsList(flights: List<Flight>) {
-      val  adapter = OneWayFlightsAdapter(flights)
+        val adapter = OneWayFlightsAdapter(flights)
         recyclerViewFlights.layoutManager = LinearLayoutManager(this)
         recyclerViewFlights.setAdapter(adapter)
     }
@@ -86,6 +98,18 @@ class OneWayFlightsActivity : AppCompatActivity(), OneWayFlightsView {
         ).show()
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        data?.let {
+            if (resultCode == Activity.RESULT_OK) {
+                if (requestCode == SELECTED_AIRWAYS_KEY) {
+
+                } else if (requestCode == SELECTED_AIRPORTS_KEY) {
+                } else if (requestCode == SELECTED_STOPS_KEY) {
+                }
+            }
+        }
+    }
     override fun onDestroy() {
         super.onDestroy()
     }

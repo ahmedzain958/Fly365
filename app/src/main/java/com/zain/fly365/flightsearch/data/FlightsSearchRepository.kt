@@ -1,7 +1,5 @@
 package com.zain.fly365.flightsearch.data
 
-import com.zain.fly365.flightsearch.data.CabinClass
-import com.zain.fly365.flightsearch.entities.Leg
 import com.zain.fly365.flightsearch.entities.RequestLeg
 import com.zain.fly365.flightsearch.entities.SearchResponse
 import io.reactivex.Completable
@@ -19,7 +17,7 @@ interface FlightsSearchRepository {
     fun getAdultsNumber(): Int
     fun getChildrenNumber(): Int
     fun getInfantsNumber(): Int
-    fun getCabinClass(): CabinClass
+    fun getCabinClass(): CabinClassEnum
     fun searchOneWayFlights(
         cabinClass: String, infant: Int, child: Int, adult: Int, legs: List<RequestLeg>
     ): Single<SearchResponse>

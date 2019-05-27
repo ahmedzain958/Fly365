@@ -31,8 +31,8 @@ class FlightsSearchLocalDataSourceImpl(val appPreference: AppPreference) :
         return adults + children + infants
     }
 
-    override fun getCabinClass(): CabinClass {
-        return CabinClass.fromInt(appPreference.getInt(KEY_PREFERENCE_CABIN_TYPE, 0))!!
+    override fun getCabinClass(): CabinClassEnum {
+        return CabinClassEnum.fromInt(appPreference.getInt(KEY_PREFERENCE_CABIN_TYPE, 0))!!
     }
 
     override fun getAdultsNumber(): Int {

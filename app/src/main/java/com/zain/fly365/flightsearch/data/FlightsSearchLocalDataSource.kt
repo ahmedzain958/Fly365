@@ -13,6 +13,6 @@ interface FlightsSearchLocalDataSource {
     fun getAdultsNumber(): Int
     fun getChildrenNumber(): Int
     fun getInfantsNumber(): Int
-    fun getCabinClass(): CabinClass
+    fun getCabinClass(): CabinClassEnum
 
 }

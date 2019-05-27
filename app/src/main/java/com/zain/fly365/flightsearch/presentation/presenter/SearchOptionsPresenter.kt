@@ -1,8 +1,7 @@
 package com.zain.fly365.flightsearch.presentation.presenter
 
 import com.zain.fly365.base.presenter.BasePresenter
-import com.zain.fly365.flightsearch.data.CabinClass
-import com.zain.fly365.flightsearch.entities.Airport
+import com.zain.fly365.flightsearch.data.CabinClassEnum
 
 interface SearchOptionsPresenter : BasePresenter {
     fun insertTravellerSearchOptions(cabinClassSelectedValue: Int, adultCount: Int, childCount: Int, infantCount: Int)
@@ -10,5 +9,5 @@ interface SearchOptionsPresenter : BasePresenter {
     fun getAdultsNumber(): Int
     fun getChildrenNumber(): Int
     fun getInfantsNumber(): Int
-    fun getSelectedCabinClass(): CabinClass
+    fun getSelectedCabinClass(): CabinClassEnum
 }

@@ -1,6 +1,6 @@
 package com.zain.fly365.flightsearch.presentation.presenter
 
-import com.zain.fly365.flightsearch.data.CabinClass
+import com.zain.fly365.flightsearch.data.CabinClassEnum
 import com.zain.fly365.flightsearch.domain.*
 import io.reactivex.disposables.CompositeDisposable
 
@@ -36,7 +36,7 @@ class SearchOptionsPresenterImpl constructor(
         return getTravellersNumberUseCase.execute(null)
     }
 
-    override fun getSelectedCabinClass(): CabinClass {
+    override fun getSelectedCabinClass(): CabinClassEnum {
         return getCabinClassUseCase.execute(null)
     }
     override fun getAdultsNumber(): Int {

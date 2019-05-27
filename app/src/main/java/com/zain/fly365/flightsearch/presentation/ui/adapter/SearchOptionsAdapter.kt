@@ -9,10 +9,10 @@ import android.widget.TextView
 import com.zain.fly365.R
 import android.view.LayoutInflater
 import androidx.annotation.RequiresApi
-import com.zain.fly365.flightsearch.data.CabinClass
+import com.zain.fly365.flightsearch.data.CabinClassEnum
 
 
-class SearchOptionsAdapter(val cabinClasses: Array<CabinClass>, val itemClickListener: ItemClickListener) :
+class SearchOptionsAdapter(val cabinClassEnums: Array<CabinClassEnum>, val itemClickListener: ItemClickListener) :
     RecyclerView.Adapter<SearchOptionsAdapter.ViewHolder>() {
     lateinit var context: Context
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -20,12 +20,12 @@ class SearchOptionsAdapter(val cabinClasses: Array<CabinClass>, val itemClickLis
         return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.cabin_type_item, parent, false))
     }
 
-    override fun getItemCount(): Int = cabinClasses.size
+    override fun getItemCount(): Int = cabinClassEnums.size
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.textViewCabinClass.text = cabinClasses.get(holder.adapterPosition).toString()
-        if (cabinClasses.get(holder.adapterPosition).isSelected) {
+        holder.textViewCabinClass.text = cabinClassEnums.get(holder.adapterPosition).toString()
+        if (cabinClassEnums.get(holder.adapterPosition).isSelected) {
             holder.textViewCabinClass.background = context.getDrawable(R.drawable.textview_border)
         } else {
             holder.textViewCabinClass.background = null

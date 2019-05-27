@@ -28,4 +28,20 @@
     <string name="generic_unknown_error">Technical Issue Occurred</string>
     <string name="stop">stop</string>
     <string name="airline">airline</string>
+    <string name="airlines">Airlines</string>
+    <string name="airports">Airports</string>
+    <string name="stops">Stops</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="clear_all">Clear All</string>
+
+
+    <string-array name="airlines">
+        <item>Air China Limited</item>
+        <item>British Airways</item>
+        <item>Emirates</item>
+        <item>KLM</item>
+        <item>Qantas</item>
+        <item>Royal Jordanian</item>
+    </string-array>
 </resources>

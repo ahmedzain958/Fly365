@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.GridLayoutManager
 import com.zain.fly365.R
-import com.zain.fly365.flightsearch.data.CabinClass
+import com.zain.fly365.flightsearch.data.CabinClassEnum
 import com.zain.fly365.flightsearch.presentation.presenter.SearchOptionsPresenter
 import com.zain.fly365.flightsearch.presentation.ui.adapter.SearchOptionsAdapter
 import kotlinx.android.synthetic.main.activity_search_options.*
@@ -22,7 +22,7 @@ class SearchOptionsActivity : AppCompatActivity(), SearchOptionsAdapter.ItemClic
     private var infantCount = 0
     private var cabinClassSelectedValue: Int = 0
     private val searchOptionsPresenter: SearchOptionsPresenter by inject { parametersOf(this) }
-    val cabinClasses: Array<CabinClass> = CabinClass.values()
+    val cabinClassEnums: Array<CabinClassEnum> = CabinClassEnum.values()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search_options)
@@ -35,7 +35,7 @@ class SearchOptionsActivity : AppCompatActivity(), SearchOptionsAdapter.ItemClic
         recyclerViewCabinTypes.layoutManager = GridLayoutManager(this, numberOfColumns)
         //set cabin class by economy at the first time but by the previously selected value if changed before
         setCabinClassSelectedValue()
-        adapter = SearchOptionsAdapter(cabinClasses, this)
+        adapter = SearchOptionsAdapter(cabinClassEnums, this)
         recyclerViewCabinTypes.adapter = adapter
         setIncrementAndDecrementClickListeners()
         setTravellersCount()
@@ -64,11 +64,11 @@ class SearchOptionsActivity : AppCompatActivity(), SearchOptionsAdapter.ItemClic
 
     private fun setCabinClassSelectedValue() {
         //clear all selected values from the list to avoid multi select
-        cabinClasses.map {
+        cabinClassEnums.map {
             it.isSelected = false
         }
         cabinClassSelectedValue = searchOptionsPresenter.getSelectedCabinClass().value
-        cabinClasses.get(cabinClassSelectedValue).isSelected = true
+        cabinClassEnums.get(cabinClassSelectedValue).isSelected = true
     }
 
     private fun initilizeToolbar() {
@@ -121,11 +121,11 @@ class SearchOptionsActivity : AppCompatActivity(), SearchOptionsAdapter.ItemClic
 
     override fun onItemClick(view: View, adapterPosition: Int) {
         //clear all selected values from the list to avoid multi select
-        cabinClasses.map {
+        cabinClassEnums.map {
             it.isSelected = false
         }
-        cabinClasses.get(adapterPosition).isSelected = true
-        adapter = SearchOptionsAdapter(cabinClasses, this)
+        cabinClassEnums.get(adapterPosition).isSelected = true
+        adapter = SearchOptionsAdapter(cabinClassEnums, this)
         recyclerViewCabinTypes.adapter = adapter
         adapter.notifyDataSetChanged()
         cabinClassSelectedValue = adapterPosition

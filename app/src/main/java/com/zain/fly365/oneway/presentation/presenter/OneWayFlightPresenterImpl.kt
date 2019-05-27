@@ -2,7 +2,7 @@ package com.zain.fly365.oneway.presentation.presenter
 
 import com.zain.fly365.base.data.exception.APIException
 import com.zain.fly365.base.threadsexecution.ExecutionThread
-import com.zain.fly365.flightsearch.data.CabinClass
+import com.zain.fly365.flightsearch.data.CabinClassEnum
 import com.zain.fly365.flightsearch.domain.*
 import com.zain.fly365.flightsearch.entities.Flight
 import com.zain.fly365.flightsearch.entities.RequestLeg
@@ -78,7 +78,7 @@ class OneWayFlightPresenterImpl(
         )
     }
 
-    fun getCabinClass(): CabinClass {
+    fun getCabinClass(): CabinClassEnum {
         return getCabinClassUseCase.execute(null)
     }
 

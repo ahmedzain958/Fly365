@@ -1,6 +1,5 @@
 package com.zain.fly365.flightsearch.data
 
-import com.zain.fly365.flightsearch.entities.Leg
 import com.zain.fly365.flightsearch.entities.RequestLeg
 import com.zain.fly365.flightsearch.entities.SearchResponse
 import io.reactivex.Completable
@@ -12,7 +11,7 @@ class FlightsSearchRepositoryImpl(
 ) :
     FlightsSearchRepository {
 
-    override fun getCabinClass(): CabinClass {
+    override fun getCabinClass(): CabinClassEnum {
         return flightsSearchLocalDataSource.getCabinClass()
     }
 
