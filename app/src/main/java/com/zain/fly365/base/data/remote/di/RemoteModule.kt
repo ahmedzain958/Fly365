@@ -17,11 +17,13 @@ import java.util.concurrent.TimeUnit
 val remoteModule = module {
     single { HeadersInterceptor() }
     single { HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY) }
-//    single { ErrorMappingInterceptor(get(), get()) }
+    single { ErrorMappingInterceptor(get(), get()) }
 
     single<OkHttpClient> {
         val builder = OkHttpClient.Builder()
-        builder.addInterceptor(get<HeadersInterceptor>())
+        builder
+            .addInterceptor(get<HeadersInterceptor>())
+            .addInterceptor(get<ErrorMappingInterceptor>())
             .connectTimeout(RemoteConstants.CONNECT_TIMEOUT, TimeUnit.SECONDS)
             .readTimeout(RemoteConstants.READ_TIMEOUT, TimeUnit.SECONDS)
             .writeTimeout(RemoteConstants.WRITE_TIMEOUT, TimeUnit.SECONDS)

@@ -44,14 +44,27 @@ class ErrorMappingInterceptor(
             try {
                 val apiException = gsonParser.fromJson(responseBody, APIException::class.java)
                 apiException.code = response.code()
-                if (apiException.errors?.legsOrigin == null) {
-                    apiException.message = resourcesRepository.getGenericUnknownErrorMessage()
-                    throw apiException
+                if (response.isSuccessful.not().or(apiException.status >= 300)) {
 
+                    if (apiException.message != null && apiException.message.toString().isBlank()) {
+                        apiException.message = resourcesRepository.getGenericUnknownErrorMessage()
+                    }
+                    if (apiException.errors != null) {
+                        if (apiException.errors?.legsOrigin != null)
+                            apiException.message = apiException.errors?.legsOrigin?.get(0).toString()
+                        else if (apiException.errors?.legsDepartureDate != null)
+                            apiException.message = apiException.errors?.legsDepartureDate?.get(0).toString()
+                        else if (apiException.errors?.legsDestination != null)
+                            apiException.message = apiException.errors?.legsDestination?.get(0).toString()
+                    }
+                    throw apiException
                 }
             } catch (e: JsonSyntaxException) {
                 throw APIException(
-                    response.code(), Errors(listOf(resourcesRepository.getGenericUnknownErrorMessage())),
+                    response.code(), Errors(
+                        listOf(resourcesRepository.getGenericUnknownErrorMessage()),
+                        null, null
+                    ),
                     resourcesRepository.getGenericUnknownErrorMessage(),
                     response.code(),
                     resourcesRepository.getGenericUnknownErrorMessage(),

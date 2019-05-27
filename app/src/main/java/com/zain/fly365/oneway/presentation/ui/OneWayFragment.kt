@@ -212,7 +212,7 @@ class OneWayFragment : Fragment() {
         textViewOriginCity = view.findViewById(R.id.textViewOriginCity)
         textViewOriginAirport = view.findViewById(R.id.textViewOriginAirport)
         textViewDestinationCity = view.findViewById(R.id.textViewDestinationCity)
-        textViewDestinationAirport = view.findViewById(R.id.textViewDestinationAirport)
+        textViewDestinationAirport = view.findViewById(R.id.textViewArrivalAirport)
         textViewDate = view.findViewById(R.id.textViewDate)
         textViewDay = view.findViewById(R.id.textViewDay)
         buttonSearch = view.findViewById(R.id.buttonSearch)

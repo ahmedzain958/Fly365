@@ -5,15 +5,20 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.zain.fly365.R
+import com.zain.fly365.flightsearch.entities.Flight
 import com.zain.fly365.flightsearch.entities.RequestLeg
+import com.zain.fly365.flightsearch.presentation.ui.adapter.AirportsAdapter
 import com.zain.fly365.oneway.presentation.presenter.OneWayFlightPresenter
 import com.zain.fly365.oneway.presentation.presenter.OneWayFlightsView
+import kotlinx.android.synthetic.main.activity_airports.*
 import kotlinx.android.synthetic.main.activity_one_way_flights.*
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 
 class OneWayFlightsActivity : AppCompatActivity(), OneWayFlightsView {
+
     companion object {
         const val LEG_KEY = "leg_key"
     }
@@ -49,6 +54,12 @@ class OneWayFlightsActivity : AppCompatActivity(), OneWayFlightsView {
         return super.onSupportNavigateUp()
     }
 
+    override fun fillFlightsList(flights: List<Flight>) {
+      val  adapter = OneWayFlightsAdapter(flights)
+        recyclerViewFlights.layoutManager = LinearLayoutManager(this)
+        recyclerViewFlights.setAdapter(adapter)
+    }
+
     override fun showLoading() {
         progressBar.visibility = View.VISIBLE
         recyclerViewFlights.visibility = View.GONE
@@ -63,7 +74,7 @@ class OneWayFlightsActivity : AppCompatActivity(), OneWayFlightsView {
         Toast.makeText(
             this,
             error,
-            Toast.LENGTH_SHORT
+            Toast.LENGTH_LONG
         ).show()
     }
 
@@ -71,7 +82,7 @@ class OneWayFlightsActivity : AppCompatActivity(), OneWayFlightsView {
         Toast.makeText(
             this,
             msg,
-            Toast.LENGTH_SHORT
+            Toast.LENGTH_LONG
         ).show()
     }
 

@@ -21,7 +21,11 @@
     <string name="infant">Infant</string>
     <string name="apply">Apply</string>
     <string name="travellers_capital">Travellers</string>
-    <string name="timeout_error_message">Looks like the server is taking too long to respond, please try again in sometime</string>
+    <string name="timeout_error_message">Looks like the server is taking too long to respond, please try again in
+        sometime
+    </string>
     <string name="no_internet_connection">No Internet Connection</string>
     <string name="generic_unknown_error">Technical Issue Occurred</string>
+    <string name="stop">stop</string>
+    <string name="airline">airline</string>
 </resources>
